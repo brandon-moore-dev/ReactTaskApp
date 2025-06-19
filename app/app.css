@@ -1,15 +1,19 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+.nav {
+    @apply rounded-md px-3 py-2 font-medium;
 }
 
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
+.mobile-nav {
+    @apply block rounded-md p-4 font-medium;
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+.nav-link-active {
+    @apply bg-gray-900 text-white;
+
+}
+
+.nav-link {
+    @apply text-gray-300 hover:bg-gray-700 hover:text-white;
+
 }

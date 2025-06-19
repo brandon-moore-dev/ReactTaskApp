@@ -1,12 +1,20 @@
-import { Welcome } from "../welcome/welcome";
+export function loader() {
+  return { name: "React Router" };
+}
 
 export function meta() {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "React Task App" },
+    { name: "description", content: "Welcome to React Task App!" },
   ];
 }
 
-export default function Home() {
-  return <Welcome />;
+export default function Home(loaderData) {
+  return (
+    <>
+      <div className="text-center p-4">
+        <h1 className="text-2xl">Hello...</h1>
+      </div>
+    </>
+  );
 }

@@ -8,6 +8,8 @@ import {
 } from "react-router";
 
 import "./app.css";
+import Navbar from "./components/Navbar";
+import { StrictMode } from "react";
 
 export const links = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -41,7 +43,12 @@ export function Layout({ children }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <StrictMode>
+      <Navbar />
+      <Outlet />
+    </StrictMode>
+  );
 }
 
 export function ErrorBoundary({ error }) {
