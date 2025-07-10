@@ -1,3 +1,4 @@
+// Filter Pending Tasks component (checkbox)
 export default function FilterPendingTasks({
   pendingOnly,
   onPendingOnlyChange,

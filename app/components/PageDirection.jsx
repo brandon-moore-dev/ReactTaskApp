@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { PageCountContext, CurrentPageContext } from "../context/Context.js";
 
+// Page Direction component (back/next arrows)
 export default function PageDirection({ type, onPageChange }) {
   const pageCount = useContext(PageCountContext);
   const currentPage = useContext(CurrentPageContext);

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import PageDirection from "./PageDirection";
 import { PageCountContext, CurrentPageContext } from "../context/Context.js";
 
+// Page Control component (page numbers)
 export default function PageControl({ onPageChange }) {
   const pageCount = useContext(PageCountContext);
   const currentPage = useContext(CurrentPageContext);

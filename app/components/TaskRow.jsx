@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// Task Row component
 export default function TaskRow({ task, onChangeTask, onDeleteTask }) {
   const [isEditing, setIsEditing] = useState(false);
   const [taskName, setTaskName] = useState(task.todo);

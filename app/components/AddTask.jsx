@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// Add Task component (text input and button)
 export default function AddTask({ onAddTask }) {
   const [taskName, setTaskName] = useState("");
 

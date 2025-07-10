@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router";
 import { FaReact, FaBars, FaXmark } from "react-icons/fa6";
 
+// Navigation component (desktop and mobile)
 export default function Navbar() {
   // Array containing navigation items
   const navItems = [
@@ -9,10 +10,10 @@ export default function Navbar() {
     { id: 2, href: "Tasks", text: "Tasks" },
   ];
 
-  // State to manage the mobile menu's visibility
+  // State to manage mobile menu visibility
   const [isOpen, setIsOpen] = useState(false);
 
-  // Toggle function to handle the mobile menu's display
+  // Toggle function to handle mobile menu display
   function toggleIsOpen() {
     setIsOpen(!isOpen);
   }
@@ -61,7 +62,7 @@ export default function Navbar() {
               : "left-[-100%] ease-in duration-75")
           }
         >
-          {/* Mobile Navigation Items */}
+          {/* Mobile Navigation Menu Items */}
           {navItems.map((item) => (
             <li key={item.id} className="">
               <NavLink

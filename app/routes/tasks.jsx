@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { PageCountContext, CurrentPageContext } from "../context/Context.js";
-
 import AddTask from "../components/AddTask";
 import FilterPendingTasks from "../components/FilterPendingTasks";
 import SearchTasks from "../components/SearchTasks";
 import TaskTable from "../components/TaskTable";
 import PageControl from "../components/PageControl";
 
+// Get task data
 export async function clientLoader({ params }) {
   const tasks = await fetch("https://dummyjson.com/todos/?delay=1000&limit=124")
     .then((res) => res.json())
@@ -14,10 +14,12 @@ export async function clientLoader({ params }) {
   return tasks;
 }
 
+// Shown while data is loading
 export function HydrateFallback() {
   return <p>Loading Tasks...</p>;
 }
 
+// Task List component
 export default function Tasks({ loaderData }) {
   const [tasks, setTasks] = useState(loaderData.todos);
   const [pendingOnly, setPendingOnly] = useState(false);
@@ -51,16 +53,19 @@ export default function Tasks({ loaderData }) {
       0
     ) + 1;
 
+  // Event handler for click of Pending checkbox
   function handleChangePendingOnly(nextPendingOnly) {
     setPendingOnly(nextPendingOnly);
     setCurrentPage(1);
   }
 
+  // Event handler for change of search text
   function handleChangeFilterText(nextFilterText) {
     setFilterText(nextFilterText);
     setCurrentPage(1);
   }
 
+  // Event handler for creation of new Task
   function handleAddTask(taskName) {
     if (taskName.trim().length !== 0) {
       setTasks([
@@ -74,6 +79,7 @@ export default function Tasks({ loaderData }) {
     }
   }
 
+  // Event handler for change of existing Task
   function handleChangeTask(nextTask) {
     setTasks(
       tasks.map((t) => {
@@ -86,10 +92,12 @@ export default function Tasks({ loaderData }) {
     );
   }
 
+  // Event handler for deletion of existing Task
   function handleDeleteTask(taskId) {
     setTasks(tasks.filter((t) => t.id !== taskId));
   }
 
+  // Event handler for change of selected page
   function handlePageChange(e) {
     if (e.target.value === "back") {
       setCurrentPage(parseInt(currentPage) - 1);
@@ -104,9 +112,11 @@ export default function Tasks({ loaderData }) {
     <>
       <div className="z-0 flex justify-center mt-4">
         <div className="w-full sm:w-1/2">
+          {/* Title */}
           <div className="flex flex-row justify-center sm:justify-start mb-4">
             <h3 className="text-2xl font-semibold text-slate-800">Task List</h3>
           </div>
+          {/* Add/search/filter */}
           <div className="sm:flex sm:flex-row sm:justify-between sm:items-end sm:flex-wrap mb-4">
             <div className="flex mb-4 sm:mb-auto sm:flex-wrap">
               <AddTask onAddTask={handleAddTask} />
@@ -121,6 +131,7 @@ export default function Tasks({ loaderData }) {
               />
             </div>
           </div>
+          {/* Task list */}
           <div className="justify-center sm:mb-4 text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
             <TaskTable
               tasks={currentTasks}
@@ -134,9 +145,7 @@ export default function Tasks({ loaderData }) {
               <div className="flex">
                 <PageCountContext value={pageCount}>
                   <CurrentPageContext value={currentPage}>
-                    <PageControl
-                      onPageChange={handlePageChange}
-                    />
+                    <PageControl onPageChange={handlePageChange} />
                   </CurrentPageContext>
                 </PageCountContext>
               </div>

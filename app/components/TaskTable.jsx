@@ -1,5 +1,6 @@
 import TaskRow from "./TaskRow";
 
+// Task Table component
 export default function TaskTable({ tasks, onChangeTask, onDeleteTask }) {
   const rows = [];
   tasks.forEach((task) => {
