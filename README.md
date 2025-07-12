@@ -22,6 +22,7 @@ After cloning repository in VS Code, run following commands in terminal:
 
 1. `npm install`
 2. `npm run dev`
+3. Open browser to `http://localhost:5173/`
 
 ## Usage
 
