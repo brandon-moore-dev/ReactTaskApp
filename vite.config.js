@@ -4,5 +4,11 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [reactRouter(), tailwindcss()],
-  assetsInclude: ['**/*.md']
+  assetsInclude: ['**/*.md'],
+  optimizeDeps: {
+    include: [
+      'react-icons/fa6',
+      'react-markdown'
+    ]
+  }
 });
