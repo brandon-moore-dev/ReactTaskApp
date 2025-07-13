@@ -6,6 +6,13 @@ import SearchTasks from "../components/SearchTasks";
 import TaskTable from "../components/TaskTable";
 import PageControl from "../components/PageControl";
 
+export function meta() {
+  return [
+    { title: "React Task App - Tasks" },
+    { name: "description", content: "Welcome to React Task App!" },
+  ];
+}
+
 // Get task data
 export async function clientLoader({ params }) {
   const tasks = await fetch("https://dummyjson.com/todos/?delay=1000&limit=124")

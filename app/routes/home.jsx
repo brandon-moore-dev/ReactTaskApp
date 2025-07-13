@@ -2,17 +2,14 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import readMeFile from "../../README.md";
 
-export function loader() {
-  return { name: "React Router" };
-}
-
 export function meta() {
   return [
-    { title: "React Task App" },
+    { title: "React Task App - Home" },
     { name: "description", content: "Welcome to React Task App!" },
   ];
 }
 
+// Home component - import and show README contents
 export default function Home(loaderData) {
   const [readMeContent, setReadMeContent] = useState("");
 
