@@ -75,14 +75,22 @@ export default function Tasks({ loaderData }) {
   // Event handler for creation of new Task
   function handleAddTask(taskName) {
     if (taskName.trim().length !== 0) {
-      setTasks([
-        ...tasks,
-        {
-          id: nextId++,
-          todo: taskName,
-          completed: false,
-        },
-      ]);
+      const result = tasks.find(
+        (task) => task.todo.toLowerCase() === taskName.toLowerCase()
+      );
+      if (result) {
+        alert('Task with name "' + taskName + '" already exists.');
+      } else {
+        setTasks([
+          ...tasks,
+          {
+            id: nextId++,
+            todo: taskName,
+            completed: false,
+          },
+        ]);
+        alert('Task "' + taskName + '" has been added.');
+      }
     }
   }
 
@@ -97,11 +105,13 @@ export default function Tasks({ loaderData }) {
         }
       })
     );
+    alert('Task "' + nextTask.todo.trim() + '" has been updated.');
   }
 
   // Event handler for deletion of existing Task
   function handleDeleteTask(taskId) {
     setTasks(tasks.filter((t) => t.id !== taskId));
+    alert("Task Id " + taskId + " has been deleted.");
   }
 
   // Event handler for change of selected page

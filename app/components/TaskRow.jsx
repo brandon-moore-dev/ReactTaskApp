@@ -5,7 +5,7 @@ export default function TaskRow({ task, onChangeTask, onDeleteTask }) {
   const [isEditing, setIsEditing] = useState(false);
   const [taskName, setTaskName] = useState(task.todo);
   const [taskCompleted, setTaskCompleted] = useState(task.completed);
-
+  
   return (
     <tr className="hover:bg-slate-50">
       {/* Task Id */}
@@ -64,11 +64,7 @@ export default function TaskRow({ task, onChangeTask, onDeleteTask }) {
                 </svg>
               </div>
             </>
-          ) : taskCompleted ? (
-            "Complete"
-          ) : (
-            "Pending"
-          )}
+          ) : taskCompleted ? ("Complete") : ("Pending")}
         </div>
       </td>
       {/* Action */}
@@ -78,12 +74,15 @@ export default function TaskRow({ task, onChangeTask, onDeleteTask }) {
             <>
               <button
                 type="button"
-                disabled={taskName.trim().length === 0}
+                disabled={
+                  taskName.trim().length === 0 ||
+                  (task.todo === taskName && task.completed === taskCompleted)
+                }
                 onClick={() => {
                   setIsEditing(false);
                   onChangeTask({
                     ...task,
-                    todo: taskName,
+                    todo: taskName.trim(),
                     completed: taskCompleted,
                   });
                 }}
