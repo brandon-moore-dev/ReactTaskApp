@@ -10,6 +10,9 @@ This React web application retrieves and displays a list of Tasks that can be ma
 - [React Router framework](https://reactrouter.com/)
 - [TailwindCSS](https://tailwindcss.com/)
 - [Vite](https://vite.dev/)
+- [Axios](https://axios-http.com/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Vitest](https://vitest.dev/)
 
 ## Requirements
 
@@ -34,3 +37,7 @@ The **/Tasks** page automatically loads the Task List. You can interact with the
 - Change the Description or Status of a Task
 - Delete a Task
 - Page through Task List
+
+## Testing
+
+The **/tests** folder contains tests for the **Home** and **Tasks** pages. To perform the tests, run command `npm test` in terminal.

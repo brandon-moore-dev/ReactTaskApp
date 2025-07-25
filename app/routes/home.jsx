@@ -1,4 +1,6 @@
+import React from "react";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import readMeFile from "../../README.md";
 
@@ -9,17 +11,34 @@ export function meta() {
   ];
 }
 
-// Home component - import and show README contents
-export default function Home(loaderData) {
-  const [readMeContent, setReadMeContent] = useState("");
+// Home component - show README contents
+export default function Home() {
+  const [readMeContent, setReadMeContent] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(readMeFile)
-      .then((response) => response.text())
-      .then((content) => {
-        setReadMeContent(content);
-      });
+    const fetchReadme = async () => {
+      try {
+        const response = await axios.get(readMeFile);
+        setReadMeContent(response.data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReadme();
   }, []);
+
+  if (loading) {
+    return <div className="z-0 flex justify-center mt-4">Loading ...</div>;
+  }
+
+  if (error) {
+    return <div>Something went wrong ...</div>;
+  }
 
   return (
     <>

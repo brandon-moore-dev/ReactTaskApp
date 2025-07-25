@@ -1,3 +1,4 @@
+import React from "react";
 import TaskRow from "./TaskRow";
 
 // Task Table component

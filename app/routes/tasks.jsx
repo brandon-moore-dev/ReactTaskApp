@@ -1,4 +1,6 @@
-import { useState } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { PageCountContext, CurrentPageContext } from "../context/Context.js";
 import AddTask from "../components/AddTask";
 import FilterPendingTasks from "../components/FilterPendingTasks";
@@ -13,27 +15,31 @@ export function meta() {
   ];
 }
 
-// Get task data
-export async function clientLoader({ params }) {
-  const tasks = await fetch("https://dummyjson.com/todos/?delay=1000&limit=124")
-    .then((res) => res.json())
-    .catch((error) => console.error(error));
-  return tasks;
-}
-
-// Shown while data is loading
-export function HydrateFallback() {
-  return <p>Loading Tasks...</p>;
-}
-
 // Task List component
-export default function Tasks({ loaderData }) {
-  const [tasks, setTasks] = useState(loaderData.todos);
+export default function Tasks() {
+  const [tasks, setTasks] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [pendingOnly, setPendingOnly] = useState(false);
   const [filterText, setFilterText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-
   const ROWS_PER_PAGE = 10;
+  const URL = "https://dummyjson.com/todos/?delay=1000&limit=124";
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await axios.get(URL);
+        setTasks(response.data.todos);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTasks();
+  }, []);
 
   let currentTasks = tasks;
 
@@ -123,6 +129,14 @@ export default function Tasks({ loaderData }) {
     } else {
       setCurrentPage(parseInt(e.target.value));
     }
+  }
+
+  if (loading) {
+    return <div className="z-0 flex justify-center mt-4">Loading ...</div>;
+  }
+
+  if (error) {
+    return <div>Something went wrong ...</div>;
   }
 
   return (

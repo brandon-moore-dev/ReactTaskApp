@@ -1,3 +1,4 @@
+import React from "react";
 import { useContext } from "react";
 import PageDirection from "./PageDirection";
 import { PageCountContext, CurrentPageContext } from "../context/Context.js";

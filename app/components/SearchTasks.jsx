@@ -1,3 +1,5 @@
+import React from "react";
+
 // Search Tasks component (text input)
 export default function SearchTasks({ filterText, onFilterTextChange }) {
   return (
